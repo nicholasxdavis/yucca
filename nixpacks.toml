@@ -1,7 +1,5 @@
 [phases.setup]
-# Only define packages here
 nixPkgs = ["php83", "nginx", "libmysqlclient"]
-# Removed the nixLibs line
 
 [phases.install]
 dependsOn = ["setup"]
@@ -10,7 +8,12 @@ cmds = [
   "mkdir -p /var/cache/nginx"
 ]
 
-# Ensure [phases.start] is completely removed
+[phases.start]
+dependsOn = ["install"]
+cmds = [
+  "echo 'start phase initialized'"
+]
 
 [start]
 cmd = "node /assets/scripts/prestart.mjs /assets/nginx.template.conf /nginx.conf && (php-fpm -y /assets/php-fpm.conf & nginx -c /nginx.conf)"
+
