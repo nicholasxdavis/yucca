@@ -22,9 +22,14 @@ if (session_status() === PHP_SESSION_NONE) {
 function db_connect() {
     static $connection = null;
     
-    // Return existing connection if available
-    if ($connection !== null && $connection instanceof mysqli && !$connection->connect_error) {
-        return $connection;
+    // Return existing connection if available and alive
+    if ($connection !== null && $connection instanceof mysqli) {
+        // Verify connection is alive; if not, reset and create a new one
+        if (@$connection->ping()) {
+            return $connection;
+        } else {
+            $connection = null;
+        }
     }
     
     $conn = null;

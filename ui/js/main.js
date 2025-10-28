@@ -174,6 +174,21 @@ document.addEventListener('DOMContentLoaded', () => {
             form.addEventListener('submit', handleFormSubmit);
         });
 
+        // --- Mobile Dropdown Menu ---
+        const mobileMenuTrigger = document.getElementById('mobile-menu-trigger');
+        const mobileMenuDropdown = document.getElementById('mobile-menu-dropdown');
+        if (mobileMenuTrigger && mobileMenuDropdown) {
+            mobileMenuTrigger.addEventListener('click', (e) => {
+                e.stopPropagation();
+                mobileMenuDropdown.style.display = mobileMenuDropdown.style.display === 'none' || mobileMenuDropdown.style.display === '' ? 'block' : 'none';
+            });
+            document.addEventListener('click', (e) => {
+                if (!mobileMenuDropdown.contains(e.target) && e.target !== mobileMenuTrigger) {
+                    mobileMenuDropdown.style.display = 'none';
+                }
+            });
+        }
+
         // --- Cookie Banner ---
         const cookieBanner = document.getElementById('cookie-banner');
         if (cookieBanner) {
