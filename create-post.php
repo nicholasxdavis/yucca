@@ -2,8 +2,8 @@
 // Create Post Page - Staff Only
 require_once 'config.php';
 
-// Only editors and admins can create community posts
-if (!is_editor() && !is_admin()) {
+// Allow any logged-in user to create community posts
+if (!is_logged_in()) {
     header('Location: index.php');
     exit;
 }
@@ -12,7 +12,7 @@ $user_id = $_SESSION['user_id'];
 $user_email = htmlspecialchars($_SESSION['user_email']);
 $user_role = $_SESSION['user_role'] ?? 'user';
 
-$page_title = "Create Post - Yucca Club";
+$page_title = "Create Community Post - Yucca Club";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -27,11 +27,8 @@ $page_title = "Create Post - Yucca Club";
 </head>
 <body style="background: var(--desert-sand); min-height: 100vh; padding: 2rem 0;">
     <div class="container" style="max-width: 900px; margin: 0 auto; background: var(--off-white); border-radius: 12px; padding: 2rem;">
-        <h1 style="margin-bottom: 1rem;">Create Community Post</h1>
-        
-        <div style="background: var(--yucca-yellow); padding: 1rem; border-radius: 8px; margin-bottom: 2rem;">
-            <p style="margin: 0; font-weight: 700;">Staff Post Creation - Create content for the community</p>
-        </div>
+        <h1 style="margin-bottom: 0.75rem;">Create Community Post</h1>
+        <p style="margin: 0 0 1rem 0; opacity: 0.8;">You can post up to 5 times per month. Submissions are reviewed before publication.</p>
         
         <form id="post-form">
             <div style="margin-bottom: 1rem;">

@@ -101,7 +101,8 @@ $page_title = "In-Depth Guides - Yucca Club";
                     <li><a href="index.php" class="active">Guides</a></li>
                     <li><a href="../events/index.php">Events</a></li>
                     <li><a href="https://yucca.printify.me/" target="_blank" rel="noopener noreferrer">Shop</a></li>
-                    <li><a href="../membership/index.php">Community</a></li>
+                    <li><a href="../community/index.php">Community</a></li>
+                    <li><a href="../membership/index.php">Membership</a></li>
                 </ul>
             </nav>
             <div class="header-actions">

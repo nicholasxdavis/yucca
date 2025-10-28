@@ -104,7 +104,8 @@ $page_title = "Stories from the Southwest - Yucca Club";
                     <li><a href="../guides/index.php">Guides</a></li>
                     <li><a href="../events/index.php">Events</a></li>
                     <li><a href="https://yucca.printify.me/" target="_blank" rel="noopener noreferrer">Shop</a></li>
-                    <li><a href="../membership/index.php">Community</a></li>
+                    <li><a href="../community/index.php">Community</a></li>
+                    <li><a href="../membership/index.php">Membership</a></li>
                 </ul>
             </nav>
             <div class="header-actions">
