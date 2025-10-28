@@ -1,3 +1,7 @@
+[variables]
+NIXPACKS_PHP_FALLBACK_PATH = "/index.php"
+NIXPACKS_PHP_ROOT_DIR = "/app"
+
 [phases.setup]
 nixPkgs = ["php83", "nginx", "libmysqlclient"]
 
