@@ -101,19 +101,43 @@ $page_title = htmlspecialchars($post['title']) . " - Yucca Club";
             </nav>
             <div class="header-actions">
                 <?php if (is_logged_in()): ?>
-                    <span style="font-size: 14px; font-weight: 700; color: var(--lobo-gray);"><?= htmlspecialchars($_SESSION['user_email']) ?></span>
-                    <a href="?logout=true" aria-label="Logout">
+                    <span class="desktop-only" style="font-size: 14px; font-weight: 700; color: var(--lobo-gray);"><?= htmlspecialchars($_SESSION['user_email']) ?></span>
+                    <a href="?logout=true" aria-label="Logout" class="desktop-only">
                         <i class="fas fa-sign-out-alt" aria-hidden="true"></i>
                     </a>
                 <?php else: ?>
-                    <a href="#" id="account-trigger" aria-label="Account">
+                    <a href="#" id="account-trigger" aria-label="Account" class="desktop-only">
                         <i class="fas fa-user" aria-hidden="true"></i>
                     </a>
                 <?php endif; ?>
-                <button id="theme-toggle" aria-label="Toggle dark mode">
+                <button id="theme-toggle" aria-label="Toggle dark mode" class="desktop-only">
                     <i class="fas fa-moon" aria-hidden="true"></i>
                     <i class="fas fa-sun" aria-hidden="true"></i>
                 </button>
+                
+                <!-- Mobile Menu -->
+                <div class="mobile-menu" style="position: relative;">
+                    <button id="mobile-menu-trigger" aria-label="Menu" style="background: none; border: none; font-size: 20px; color: var(--lobo-gray); cursor: pointer; padding: 0.5rem;">
+                        <i class="fas fa-ellipsis-h" aria-hidden="true"></i>
+                    </button>
+                    <div id="mobile-menu-dropdown" class="mobile-dropdown" style="display:none; position:absolute; right:0; top:100%; background: var(--off-white); border:2px solid var(--lobo-gray); border-radius:8px; padding:0.5rem; min-width: 200px; margin-top: 0.5rem; box-shadow: 0 10px 30px rgba(0,0,0,0.2); z-index: 1000;">
+                        <?php if (is_logged_in()): ?>
+                            <div style="padding: 0.75rem; font-weight:700; font-size:0.9rem; border-bottom:1px solid rgba(0,0,0,0.1); margin-bottom:0.5rem;"><?= htmlspecialchars($_SESSION['user_email']) ?></div>
+                            <a href="?logout=true" style="display:block; padding:0.75rem; color:var(--lobo-gray); text-decoration:none;">
+                                <i class="fas fa-sign-out-alt" style="margin-right:0.5rem;"></i>Log Out
+                            </a>
+                        <?php else: ?>
+                            <a href="#" id="mobile-account-trigger" style="display:block; padding:0.75rem; color:var(--lobo-gray); text-decoration:none;">
+                                <i class="fas fa-user" style="margin-right:0.5rem;"></i>Log In
+                            </a>
+                        <?php endif; ?>
+                        <button id="mobile-theme-toggle" style="display:block; padding:0.75rem; background:none; border:none; text-align:left; width:100%; color:var(--lobo-gray); cursor:pointer;">
+                            <i class="fas fa-moon" aria-hidden="true"></i>
+                            <i class="fas fa-sun" aria-hidden="true"></i>
+                            <span style="margin-left: 0.5rem;">Toggle Theme</span>
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     </header>
@@ -141,42 +165,68 @@ $page_title = htmlspecialchars($post['title']) . " - Yucca Club";
             <div style="font-size: 1.125rem; line-height: 1.8; color: #333;">
                 <?php
                 $rendered = false;
-                // Try to render JSON blocks if present
                 $content_raw = $post['content'] ?? '';
-                $blocks = json_decode($content_raw, true);
-                if (is_array($blocks)) {
+                $contentData = json_decode($content_raw, true);
+                
+                // New rich format with intro and sections
+                if (is_array($contentData) && (isset($contentData['intro']) || isset($contentData['sections']))) {
                     $rendered = true;
-                    foreach ($blocks as $block) {
-                        $type = $block['type'] ?? 'paragraph';
-                        $data = $block['data'] ?? [];
-                        if ($type === 'heading') {
-                            $text = htmlspecialchars($data['text'] ?? '');
-                            echo "<h2 style=\"font-size:2rem; margin:1.25rem 0 0.5rem;\">$text</h2>";
-                        } elseif ($type === 'subheading') {
-                            $text = htmlspecialchars($data['text'] ?? '');
-                            echo "<h3 style=\"font-size:1.5rem; margin:1rem 0 0.5rem;\">$text</h3>";
-                        } elseif ($type === 'paragraph') {
-                            $text = nl2br(htmlspecialchars($data['text'] ?? ''));
-                            echo "<p style=\"margin:0.75rem 0;\">$text</p>";
-                        } elseif ($type === 'blockquote') {
-                            $text = nl2br(htmlspecialchars($data['text'] ?? ''));
-                            echo "<blockquote style=\"border-left:4px solid var(--yucca-yellow); padding-left:1rem; margin:1rem 0; color:#555; font-style:italic;\">$text</blockquote>";
-                        } elseif ($type === 'list') {
-                            $items = $data['items'] ?? [];
-                            echo "<ul style=\"margin:0.75rem 0 0.75rem 1.25rem;\">";
-                            foreach ($items as $it) {
-                                echo "<li>" . htmlspecialchars($it) . "</li>";
-                            }
-                            echo "</ul>";
-                        } elseif ($type === 'image') {
-                            $url = htmlspecialchars($data['url'] ?? '');
-                            $alt = htmlspecialchars($data['alt'] ?? '');
-                            if (!empty($url)) {
-                                echo "<figure style=\"margin:1.25rem 0;\"><img src=\"$url\" alt=\"$alt\" style=\"width:100%; border-radius:8px;\"><figcaption style=\"font-size:0.9rem; opacity:0.8; margin-top:0.25rem;\">$alt</figcaption></figure>";
+                    
+                    // Render intro if exists
+                    if (!empty($contentData['intro'])) {
+                        echo "<p style=\"font-size:1.25rem; font-weight:500; color:var(--lobo-gray); margin-bottom:2rem;\">" . nl2br(htmlspecialchars($contentData['intro'])) . "</p>";
+                    }
+                    
+                    // Render sections
+                    if (isset($contentData['sections']) && is_array($contentData['sections'])) {
+                        foreach ($contentData['sections'] as $section) {
+                            $type = $section['type'] ?? '';
+                            $data = $section['data'] ?? [];
+                            
+                            switch($type) {
+                                case 'paragraph':
+                                    if (!empty($data['text'])) {
+                                        echo "<p style=\"margin:1rem 0;\">" . nl2br(htmlspecialchars($data['text'])) . "</p>";
+                                    }
+                                    break;
+                                    
+                                case 'heading':
+                                    if (!empty($data['text'])) {
+                                        echo "<h2 style=\"font-size:2rem; margin-top:2rem; margin-bottom:1rem; font-family:var(--font-serif); color:var(--lobo-gray);\">" . htmlspecialchars($data['text']) . "</h2>";
+                                    }
+                                    break;
+                                    
+                                case 'image':
+                                    if (!empty($data['url'])) {
+                                        $url = htmlspecialchars($data['url']);
+                                        $alt = htmlspecialchars($data['alt'] ?? '');
+                                        echo "<figure style=\"margin:2rem 0;\">";
+                                        echo "<img src=\"$url\" alt=\"$alt\" style=\"width:100%; border-radius:12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);\">";
+                                        if (!empty($alt)) {
+                                            echo "<figcaption style=\"font-size:0.9rem; opacity:0.8; margin-top:0.75rem; text-align:center; color:var(--lobo-gray);\">$alt</figcaption>";
+                                        }
+                                        echo "</figure>";
+                                    }
+                                    break;
+                                    
+                                case 'list':
+                                    if (!empty($data['text'])) {
+                                        $items = explode("\n", $data['text']);
+                                        echo "<ul style=\"margin:1.5rem 0; padding-left: 2rem; list-style: disc;\">";
+                                        foreach ($items as $item) {
+                                            if (trim($item)) {
+                                                echo "<li style=\"margin:0.5rem 0;\">" . htmlspecialchars(trim($item)) . "</li>";
+                                            }
+                                        }
+                                        echo "</ul>";
+                                    }
+                                    break;
                             }
                         }
                     }
                 }
+                
+                // Fallback to plain text
                 if (!$rendered) {
                     echo nl2br(htmlspecialchars($post['content']));
                 }

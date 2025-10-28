@@ -360,30 +360,68 @@ main {
             <div class="header-actions">
                 <?php if ($is_logged_in): ?>
                     <?php if (is_admin()): ?>
-                        <a href="admin.php" id="admin-trigger" aria-label="Admin Panel" title="Admin Panel" style="font-size: 14px; color: var(--yucca-yellow); margin-right: 0.5rem;">
+                        <a href="admin.php" id="admin-trigger" aria-label="Admin Panel" title="Admin Panel" class="desktop-only" style="font-size: 14px; color: var(--yucca-yellow); margin-right: 0.5rem;">
                             <i class="fas fa-cog" aria-hidden="true"></i>
                         </a>
                     <?php endif; ?>
                     <?php if (is_editor() || is_admin()): ?>
-                        <a href="upload.html" id="upload-trigger" aria-label="Upload Content" title="Upload Content" style="font-size: 14px; color: var(--yucca-yellow); margin-right: 0.5rem;">
+                        <a href="upload.html" id="upload-trigger" aria-label="Upload Content" title="Upload Content" class="desktop-only" style="font-size: 14px; color: var(--yucca-yellow); margin-right: 0.5rem;">
                             <i class="fas fa-plus" aria-hidden="true"></i>
                         </a>
                     <?php endif; ?>
-                    <a href="create-post.php" id="create-post" aria-label="Create Community Post" title="Create Community Post" style="font-size: 14px; color: var(--yucca-yellow); margin-right: 0.5rem;">
+                    <a href="create-post.php" id="create-post" aria-label="Create Community Post" title="Create Community Post" class="desktop-only" style="font-size: 14px; color: var(--yucca-yellow); margin-right: 0.5rem;">
                         <i class="fas fa-edit" aria-hidden="true"></i>
                     </a>
-                    <a href="?logout=true" id="logout-trigger" aria-label="Logout" title="Logout">
+                    <span class="desktop-only" style="font-size: 14px; font-weight: 700; color: var(--lobo-gray); margin-right: 0.5rem;"><?= $user_email ?></span>
+                    <a href="?logout=true" id="logout-trigger" aria-label="Logout" title="Logout" class="desktop-only">
                         <i class="fas fa-sign-out-alt" aria-hidden="true"></i>
                     </a>
                 <?php else: ?>
-                    <a href="#" id="account-trigger" aria-label="Account">
+                    <a href="#" id="account-trigger" aria-label="Account" class="desktop-only">
                         <i class="fas fa-user" aria-hidden="true"></i>
                     </a>
                 <?php endif; ?>
-                <button id="theme-toggle" aria-label="Toggle dark mode">
+                <button id="theme-toggle" aria-label="Toggle dark mode" class="desktop-only">
                     <i class="fas fa-moon" aria-hidden="true"></i>
                     <i class="fas fa-sun" aria-hidden="true"></i>
                 </button>
+                
+                <!-- Mobile Menu -->
+                <div class="mobile-menu" style="position: relative;">
+                    <button id="mobile-menu-trigger" aria-label="Menu" style="background: none; border: none; font-size: 20px; color: var(--lobo-gray); cursor: pointer; padding: 0.5rem;">
+                        <i class="fas fa-ellipsis-h" aria-hidden="true"></i>
+                    </button>
+                    <div id="mobile-menu-dropdown" class="mobile-dropdown" style="display:none; position:absolute; right:0; top:100%; background: var(--off-white); border:2px solid var(--lobo-gray); border-radius:8px; padding:0.5rem; min-width: 200px; margin-top: 0.5rem; box-shadow: 0 10px 30px rgba(0,0,0,0.2); z-index: 1000;">
+                        <?php if ($is_logged_in): ?>
+                            <div style="padding: 0.75rem; font-weight:700; font-size:0.9rem; border-bottom:1px solid rgba(0,0,0,0.1); margin-bottom:0.5rem;"><?= $user_email ?></div>
+                            <?php if (is_admin()): ?>
+                                <a href="admin.php" style="display:block; padding:0.75rem; color:var(--lobo-gray); text-decoration:none;">
+                                    <i class="fas fa-cog" style="margin-right:0.5rem;"></i>Admin Panel
+                                </a>
+                            <?php endif; ?>
+                            <?php if (is_editor() || is_admin()): ?>
+                                <a href="upload.html" style="display:block; padding:0.75rem; color:var(--lobo-gray); text-decoration:none;">
+                                    <i class="fas fa-plus" style="margin-right:0.5rem;"></i>Upload Content
+                                </a>
+                            <?php endif; ?>
+                            <a href="create-post.php" style="display:block; padding:0.75rem; color:var(--lobo-gray); text-decoration:none;">
+                                <i class="fas fa-edit" style="margin-right:0.5rem;"></i>Create Post
+                            </a>
+                            <a href="?logout=true" style="display:block; padding:0.75rem; color:var(--lobo-gray); text-decoration:none;">
+                                <i class="fas fa-sign-out-alt" style="margin-right:0.5rem;"></i>Log Out
+                            </a>
+                        <?php else: ?>
+                            <a href="#" id="mobile-account-trigger" style="display:block; padding:0.75rem; color:var(--lobo-gray); text-decoration:none;">
+                                <i class="fas fa-user" style="margin-right:0.5rem;"></i>Log In
+                            </a>
+                        <?php endif; ?>
+                        <button id="mobile-theme-toggle" style="display:block; padding:0.75rem; background:none; border:none; text-align:left; width:100%; color:var(--lobo-gray); cursor:pointer;">
+                            <i class="fas fa-moon" aria-hidden="true"></i>
+                            <i class="fas fa-sun" aria-hidden="true"></i>
+                            <span style="margin-left: 0.5rem;">Toggle Theme</span>
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     </header>

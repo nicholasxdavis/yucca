@@ -177,6 +177,9 @@ document.addEventListener('DOMContentLoaded', () => {
         // --- Mobile Dropdown Menu ---
         const mobileMenuTrigger = document.getElementById('mobile-menu-trigger');
         const mobileMenuDropdown = document.getElementById('mobile-menu-dropdown');
+        const mobileThemeToggle = document.getElementById('mobile-theme-toggle');
+        const mobileAccountTrigger = document.getElementById('mobile-account-trigger');
+        
         if (mobileMenuTrigger && mobileMenuDropdown) {
             mobileMenuTrigger.addEventListener('click', (e) => {
                 e.stopPropagation();
@@ -184,6 +187,37 @@ document.addEventListener('DOMContentLoaded', () => {
             });
             document.addEventListener('click', (e) => {
                 if (!mobileMenuDropdown.contains(e.target) && e.target !== mobileMenuTrigger) {
+                    mobileMenuDropdown.style.display = 'none';
+                }
+            });
+        }
+        
+        // Mobile theme toggle
+        if (mobileThemeToggle) {
+            mobileThemeToggle.addEventListener('click', () => {
+                const currentTheme = htmlElement.getAttribute('data-theme');
+                if (currentTheme === 'dark') {
+                    htmlElement.setAttribute('data-theme', 'light');
+                    localStorage.setItem('theme', 'light');
+                } else {
+                    htmlElement.setAttribute('data-theme', 'dark');
+                    localStorage.setItem('theme', 'dark');
+                }
+                updateThemeIcons();
+                if (mobileMenuDropdown) {
+                    mobileMenuDropdown.style.display = 'none';
+                }
+            });
+        }
+        
+        // Mobile account trigger
+        if (mobileAccountTrigger) {
+            mobileAccountTrigger.addEventListener('click', (e) => {
+                e.preventDefault();
+                if (accountModal) {
+                    openModal(accountModal);
+                }
+                if (mobileMenuDropdown) {
                     mobileMenuDropdown.style.display = 'none';
                 }
             });

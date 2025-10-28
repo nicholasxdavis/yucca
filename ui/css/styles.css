@@ -930,6 +930,12 @@ html[data-theme='dark'] .event-date { background-color: #444; }
     .header-content { flex-direction: column; gap: var(--spacing-unit); }
     .primary-nav ul { position: static; transform: none; width: auto; flex-wrap: wrap; justify-content: center; }
     .header-actions { position: absolute; top: 1.25rem; right: 1.5rem; z-index: 1000; gap: 1.1rem; }
+    
+    /* Desktop-only elements hidden on mobile */
+    .desktop-only { display: none !important; }
+    
+    /* Mobile menu visible on mobile */
+    .mobile-menu { display: block !important; }
     /* Homepage Bento Grid */
     .bento-grid { grid-template-columns: 1fr; }
     .item-featured, .item-guides-promo, .item-newsletter, .item-recent-1, .item-recent-2 { grid-column: auto; grid-row: auto; }
@@ -947,4 +953,24 @@ html[data-theme='dark'] .event-date { background-color: #444; }
     /* Banners & Footer */
     #cookie-banner { flex-direction: column; text-align: center; gap: 1rem; }
     .footer-content { flex-direction: column; align-items: center; }
+}
+
+/* Desktop - hide mobile menu, show desktop-only */
+@media (min-width: 769px) {
+    .mobile-menu { display: none !important; }
+    .desktop-only { display: block !important; }
+}
+
+/* Mobile menu styling */
+.mobile-dropdown {
+    transition: all var(--transition-speed) ease;
+}
+
+.mobile-dropdown a, .mobile-dropdown button {
+    transition: background var(--transition-speed) ease, color var(--transition-speed) ease;
+}
+
+.mobile-dropdown a:hover, .mobile-dropdown button:hover {
+    background: var(--darker-sand);
+    color: var(--yucca-yellow);
 }
