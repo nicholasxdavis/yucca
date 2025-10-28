@@ -20,18 +20,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
 // Function to establish database connection
 function db_connect() {
-    static $connection = null;
-    
-    // Return existing connection if available and alive
-    if ($connection !== null && $connection instanceof mysqli) {
-        // Verify connection is alive; if not, reset and create a new one
-        if (@$connection->ping()) {
-            return $connection;
-        } else {
-            $connection = null;
-        }
-    }
-    
+    // Always create a new connection - don't reuse static connections
     $conn = null;
     $error = '';
     $attempts = [
@@ -44,7 +33,6 @@ function db_connect() {
         $conn = @new mysqli($hostname, DB_USERNAME, DB_PASSWORD, DB_NAME);
         if (!$conn->connect_error) {
             $conn->set_charset('utf8mb4');
-            $connection = $conn; // Store for reuse
             return $conn;
         }
         $error = $conn->connect_error;
@@ -58,8 +46,7 @@ function db_connect() {
         <ul>" . 
         implode('', array_map(function($h) { return "<li>$h</li>"; }, $attempts)) . 
         "</ul>
-        <p><strong>Last error:</strong> $error</p>
-        // <p><a href='test_connection.php'>Run connection test</a></p>"); // removed test link
+        <p><strong>Last error:</strong> $error</p>");
 }
 
 // Function to check if user is logged in

@@ -359,7 +359,6 @@ main {
             </nav>
             <div class="header-actions">
                 <?php if ($is_logged_in): ?>
-                    <span style="font-size: 14px; font-weight: 700; color: var(--lobo-gray);"><?= $user_email ?></span>
                     <?php if (is_admin()): ?>
                         <a href="admin.php" id="admin-trigger" aria-label="Admin Panel" title="Admin Panel" style="font-size: 14px; color: var(--yucca-yellow); margin-right: 0.5rem;">
                             <i class="fas fa-cog" aria-hidden="true"></i>
@@ -370,6 +369,9 @@ main {
                             <i class="fas fa-plus" aria-hidden="true"></i>
                         </a>
                     <?php endif; ?>
+                    <a href="create-post.php" id="create-post" aria-label="Create Community Post" title="Create Community Post" style="font-size: 14px; color: var(--yucca-yellow); margin-right: 0.5rem;">
+                        <i class="fas fa-edit" aria-hidden="true"></i>
+                    </a>
                     <a href="?logout=true" id="logout-trigger" aria-label="Logout" title="Logout">
                         <i class="fas fa-sign-out-alt" aria-hidden="true"></i>
                     </a>

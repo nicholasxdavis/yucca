@@ -14,12 +14,13 @@ $post_usage = [
     'remaining' => 5
 ];
 
+$community_posts = [];
+
 if ($is_logged_in) {
     try {
         $conn = db_connect();
         $current_month = date('Y-m');
         
-        if (!$conn || $conn->connect_error) { throw new Exception('DB connection error'); }
         $stmt = $conn->prepare("SELECT post_count FROM post_usage WHERE user_id = ? AND month = ?");
         $stmt->bind_param("is", $user_id, $current_month);
         $stmt->execute();
@@ -38,10 +39,8 @@ if ($is_logged_in) {
 }
 
 // Get published community posts
-$community_posts = [];
 try {
     $conn = db_connect();
-    if (!$conn || $conn->connect_error) { throw new Exception('DB connection error'); }
     $stmt = $conn->prepare("SELECT up.*, u.email as user_email FROM user_posts up JOIN users u ON up.user_id = u.id WHERE up.status = 'published' ORDER BY up.created_at DESC LIMIT 20");
     $stmt->execute();
     $result = $stmt->get_result();
@@ -91,27 +90,18 @@ $page_title = "Community - Yucca Club";
             </nav>
             <div class="header-actions">
                 <?php if ($is_logged_in): ?>
-                    <a href="../../create-post.php" id="create-post" aria-label="Create post" title="Create post" class="desktop-only">
-                        <i class="fas fa-plus" aria-hidden="true"></i>
+                    <span style="font-size: 14px; font-weight: 700;"><?= $user_email ?></span>
+                    <a href="../../create-post.php" id="create-post" aria-label="Create post" title="Create post" style="font-size: 14px; color: var(--yucca-yellow); margin-right: 0.5rem;">
+                        <i class="fas fa-edit" aria-hidden="true"></i>
+                    </a>
+                    <a href="../../index.php?logout=true" aria-label="Logout">
+                        <i class="fas fa-sign-out-alt" aria-hidden="true"></i>
                     </a>
                 <?php endif; ?>
-                <div class="mobile-menu">
-                    <button id="mobile-menu-trigger" aria-label="Menu"><i class="fas fa-ellipsis-h"></i></button>
-                    <div id="mobile-menu-dropdown" class="mobile-dropdown" style="display:none; position:absolute; right:0; top:100%; background: var(--desert-sand); border:1px solid rgba(0,0,0,0.1); border-radius:8px; padding:0.5rem; min-width: 180px; box-shadow: 0 10px 25px rgba(0,0,0,0.1);">
-                        <?php if ($is_logged_in): ?>
-                            <div style="padding: 0.5rem 0.75rem; font-weight:700; font-size:0.9rem; opacity:0.8;"><?= $user_email ?></div>
-                            <a href="../../create-post.php" class="dropdown-item" style="display:block; padding:0.5rem 0.75rem;">New Post</a>
-                            <a href="../../index.php?logout=true" class="dropdown-item" style="display:block; padding:0.5rem 0.75rem;">Log Out</a>
-                        <?php else: ?>
-                            <a href="../../index.php#account-modal" class="dropdown-item" style="display:block; padding:0.5rem 0.75rem;">Log In</a>
-                        <?php endif; ?>
-                        <button id="theme-toggle" class="dropdown-item" style="display:block; padding:0.5rem 0.75rem; background:none; border:none; text-align:left; width:100%;">
-                            <i class="fas fa-moon" aria-hidden="true"></i>
-                            <i class="fas fa-sun" aria-hidden="true"></i>
-                            <span style="margin-left: 0.5rem;">Theme</span>
-                        </button>
-                    </div>
-                </div>
+                <button id="theme-toggle" aria-label="Toggle dark mode">
+                    <i class="fas fa-moon" aria-hidden="true"></i>
+                    <i class="fas fa-sun" aria-hidden="true"></i>
+                </button>
             </div>
         </div>
     </header>
@@ -121,10 +111,15 @@ $page_title = "Community - Yucca Club";
             <h1 class="page-title">Community Posts</h1>
             
             <?php if ($is_logged_in): ?>
-            <!-- User posting disabled - Staff only -->
-            <div style="background: #fff3cd; padding: 1.5rem; border-radius: 8px; margin-bottom: 2rem; border: 2px solid #ffc107;">
-                <p style="margin: 0; font-weight: 700;">Community posts are currently available to Yucca Club staff only. Check back soon for user posting!</p>
+            <?php if ($post_usage['remaining'] > 0): ?>
+            <div style="background: #d4edda; padding: 1rem; border-radius: 8px; margin-bottom: 2rem; border: 2px solid #28a745;">
+                <p style="margin: 0;"><strong><?= $post_usage['remaining'] ?></strong> post<?= $post_usage['remaining'] > 1 ? 's' : '' ?> remaining this month</p>
             </div>
+            <?php else: ?>
+            <div style="background: #fff3cd; padding: 1rem; border-radius: 8px; margin-bottom: 2rem; border: 2px solid #ffc107;">
+                <p style="margin: 0;">You've reached your 5 post limit for this month. Come back next month!</p>
+            </div>
+            <?php endif; ?>
             <?php else: ?>
             <div style="background: #fff3cd; padding: 1.5rem; border-radius: 8px; margin-bottom: 2rem; text-align: center;">
                 <p style="margin-bottom: 1rem;">Join our community! <a href="../../index.php#account-modal" style="color: var(--yucca-yellow); font-weight: 700;">Sign up</a> to create up to 5 posts per month.</p>
