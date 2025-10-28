@@ -90,18 +90,44 @@ $page_title = "Community - Yucca Club";
             </nav>
             <div class="header-actions">
                 <?php if ($is_logged_in): ?>
-                    <span style="font-size: 14px; font-weight: 700;"><?= $user_email ?></span>
-                    <a href="../../create-post.php" id="create-post" aria-label="Create post" title="Create post" style="font-size: 14px; color: var(--yucca-yellow); margin-right: 0.5rem;">
+                    <span class="desktop-only" style="font-size: 14px; font-weight: 700;"><?= $user_email ?></span>
+                    <a href="../../create-post.php" id="create-post" aria-label="Create post" title="Create post" class="desktop-only" style="font-size: 14px; color: var(--yucca-yellow); margin-right: 0.5rem;">
                         <i class="fas fa-edit" aria-hidden="true"></i>
                     </a>
-                    <a href="../../index.php?logout=true" aria-label="Logout">
+                    <a href="../../index.php?logout=true" aria-label="Logout" class="desktop-only">
                         <i class="fas fa-sign-out-alt" aria-hidden="true"></i>
                     </a>
                 <?php endif; ?>
-                <button id="theme-toggle" aria-label="Toggle dark mode">
+                <button id="theme-toggle" aria-label="Toggle dark mode" class="desktop-only">
                     <i class="fas fa-moon" aria-hidden="true"></i>
                     <i class="fas fa-sun" aria-hidden="true"></i>
                 </button>
+                
+                <!-- Mobile Menu -->
+                <div class="mobile-menu">
+                    <button id="mobile-menu-trigger" aria-label="Menu">
+                        <i class="fas fa-ellipsis-h" aria-hidden="true"></i>
+                    </button>
+                    <div id="mobile-menu-dropdown" class="mobile-dropdown">
+                        <?php if ($is_logged_in): ?>
+                            <div class="mobile-user-info"><?= $user_email ?></div>
+                            <a href="../../create-post.php">
+                                <i class="fas fa-edit"></i>Create Post
+                            </a>
+                            <a href="../../index.php?logout=true">
+                                <i class="fas fa-sign-out-alt"></i>Log Out
+                            </a>
+                        <?php else: ?>
+                            <a href="#" id="mobile-account-trigger">
+                                <i class="fas fa-user"></i>Log In
+                            </a>
+                        <?php endif; ?>
+                        <button id="mobile-theme-toggle">
+                            <i class="fas fa-moon"></i>
+                            <span>Theme</span>
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     </header>

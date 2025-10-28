@@ -183,11 +183,12 @@ document.addEventListener('DOMContentLoaded', () => {
         if (mobileMenuTrigger && mobileMenuDropdown) {
             mobileMenuTrigger.addEventListener('click', (e) => {
                 e.stopPropagation();
-                mobileMenuDropdown.style.display = mobileMenuDropdown.style.display === 'none' || mobileMenuDropdown.style.display === '' ? 'block' : 'none';
+                mobileMenuDropdown.classList.toggle('show');
             });
+            
             document.addEventListener('click', (e) => {
                 if (!mobileMenuDropdown.contains(e.target) && e.target !== mobileMenuTrigger) {
-                    mobileMenuDropdown.style.display = 'none';
+                    mobileMenuDropdown.classList.remove('show');
                 }
             });
         }
@@ -205,7 +206,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
                 updateThemeIcons();
                 if (mobileMenuDropdown) {
-                    mobileMenuDropdown.style.display = 'none';
+                    mobileMenuDropdown.classList.remove('show');
                 }
             });
         }
@@ -218,7 +219,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     openModal(accountModal);
                 }
                 if (mobileMenuDropdown) {
-                    mobileMenuDropdown.style.display = 'none';
+                    mobileMenuDropdown.classList.remove('show');
                 }
             });
         }

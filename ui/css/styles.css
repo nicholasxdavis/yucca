@@ -962,15 +962,97 @@ html[data-theme='dark'] .event-date { background-color: #444; }
 }
 
 /* Mobile menu styling */
+.mobile-menu {
+    position: relative;
+}
+
+.mobile-menu button {
+    background: none;
+    border: none;
+    font-size: 20px;
+    color: var(--lobo-gray);
+    cursor: pointer;
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 6px;
+    transition: background 0.2s ease;
+}
+
+.mobile-menu button:hover {
+    background: var(--darker-sand);
+}
+
 .mobile-dropdown {
-    transition: all var(--transition-speed) ease;
+    position: absolute;
+    right: 0;
+    top: calc(100% + 0.5rem);
+    background: var(--off-white);
+    border: 2px solid var(--lobo-gray);
+    border-radius: 12px;
+    padding: 0.5rem;
+    min-width: 220px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    z-index: 1000;
+    opacity: 0;
+    transform: scale(0.95) translateY(-10px);
+    pointer-events: none;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.mobile-dropdown a, .mobile-dropdown button {
-    transition: background var(--transition-speed) ease, color var(--transition-speed) ease;
+.mobile-dropdown.show {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    pointer-events: all;
 }
 
-.mobile-dropdown a:hover, .mobile-dropdown button:hover {
+.mobile-dropdown a,
+.mobile-dropdown button {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 0.875rem;
+    color: var(--lobo-gray);
+    text-decoration: none;
+    background: none;
+    border: none;
+    text-align: left;
+    width: 100%;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    font-family: var(--font-sans);
+}
+
+.mobile-dropdown a:hover,
+.mobile-dropdown button:hover {
     background: var(--darker-sand);
     color: var(--yucca-yellow);
+    transform: translateX(3px);
+}
+
+.mobile-dropdown .mobile-user-info {
+    padding: 0.75rem 0.875rem;
+    font-weight: 700;
+    font-size: 13px;
+    color: var(--lobo-gray);
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    margin-bottom: 0.25rem;
+    opacity: 0.8;
+}
+
+.mobile-dropdown .fas {
+    width: 18px;
+    text-align: center;
+    font-size: 15px;
+}
+
+.mobile-dropdown button .fas.fa-moon,
+.mobile-dropdown button .fas.fa-sun {
+    display: inline-block;
 }

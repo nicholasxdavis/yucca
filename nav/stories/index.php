@@ -118,18 +118,17 @@ $page_title = "Stories from the Southwest - Yucca Club";
                 </button>
                 
                 <!-- Mobile Menu -->
-                <div class="mobile-menu" style="position: relative;">
-                    <button id="mobile-menu-trigger" aria-label="Menu" style="background: none; border: none; font-size: 20px; color: var(--lobo-gray); cursor: pointer; padding: 0.5rem;">
+                <div class="mobile-menu">
+                    <button id="mobile-menu-trigger" aria-label="Menu">
                         <i class="fas fa-ellipsis-h" aria-hidden="true"></i>
                     </button>
-                    <div id="mobile-menu-dropdown" class="mobile-dropdown" style="display:none; position:absolute; right:0; top:100%; background: var(--off-white); border:2px solid var(--lobo-gray); border-radius:8px; padding:0.5rem; min-width: 200px; margin-top: 0.5rem; box-shadow: 0 10px 30px rgba(0,0,0,0.2); z-index: 1000;">
-                        <a href="#" id="mobile-account-trigger" style="display:block; padding:0.75rem; color:var(--lobo-gray); text-decoration:none;">
-                            <i class="fas fa-user" style="margin-right:0.5rem;"></i>Log In
+                    <div id="mobile-menu-dropdown" class="mobile-dropdown">
+                        <a href="#" id="mobile-account-trigger">
+                            <i class="fas fa-user"></i>Log In
                         </a>
-                        <button id="mobile-theme-toggle" style="display:block; padding:0.75rem; background:none; border:none; text-align:left; width:100%; color:var(--lobo-gray); cursor:pointer;">
-                            <i class="fas fa-moon" aria-hidden="true"></i>
-                            <i class="fas fa-sun" aria-hidden="true"></i>
-                            <span style="margin-left: 0.5rem;">Toggle Theme</span>
+                        <button id="mobile-theme-toggle">
+                            <i class="fas fa-moon"></i>
+                            <span>Theme</span>
                         </button>
                     </div>
                 </div>
