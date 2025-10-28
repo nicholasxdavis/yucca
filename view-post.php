@@ -85,19 +85,35 @@ $page_title = htmlspecialchars($post['title']) . " - Yucca Club";
 <body>
     <header class="site-header">
         <div class="container header-content">
-            <a href="index.php" class="site-logo">
-                <img class="logo-light" src="ui/img/logo.png" alt="Yucca Club Logo" style="width:180px;">
-                <img class="logo-dark" src="ui/img/logo_dark.png" alt="Yucca Club Logo Dark" style="width:180px;">
+            <a href="index.php" class="site-logo" aria-label="Yucca Club Homepage">
+                <img class="logo-light" src="ui/img/logo.png" alt="Yucca Club Logo Light" style="width:180px; height:auto;">
+                <img class="logo-dark" src="ui/img/logo_dark.png" alt="Yucca Club Logo Dark" style="width:180px; height:auto;">
             </a>
-            <nav class="primary-nav">
+            <nav class="primary-nav" aria-label="Main Navigation">
                 <ul>
                     <li><a href="nav/stories/index.php">Stories</a></li>
                     <li><a href="nav/guides/index.php">Guides</a></li>
                     <li><a href="nav/events/index.php">Events</a></li>
-                    <li><a href="https://yucca.printify.me/" target="_blank">Shop</a></li>
-                    <li><a href="nav/community/index.php">Community</a></li>
+                    <li><a href="https://yucca.printify.me/" target="_blank" rel="noopener noreferrer">Shop</a></li>
+                    <li><a href="nav/membership/index.php">Community</a></li>
                 </ul>
             </nav>
+            <div class="header-actions">
+                <?php if (is_logged_in()): ?>
+                    <span style="font-size: 14px; font-weight: 700; color: var(--lobo-gray);"><?= htmlspecialchars($_SESSION['user_email']) ?></span>
+                    <a href="?logout=true" aria-label="Logout">
+                        <i class="fas fa-sign-out-alt" aria-hidden="true"></i>
+                    </a>
+                <?php else: ?>
+                    <a href="#" id="account-trigger" aria-label="Account">
+                        <i class="fas fa-user" aria-hidden="true"></i>
+                    </a>
+                <?php endif; ?>
+                <button id="theme-toggle" aria-label="Toggle dark mode">
+                    <i class="fas fa-moon" aria-hidden="true"></i>
+                    <i class="fas fa-sun" aria-hidden="true"></i>
+                </button>
+            </div>
         </div>
     </header>
 
@@ -172,9 +188,20 @@ $page_title = htmlspecialchars($post['title']) . " - Yucca Club";
         </div>
     </main>
 
-    <footer class="site-footer" style="margin-top: 4rem;">
+    <footer class="site-footer">
         <div class="container">
-            <p>&copy; <?= date('Y') ?> Yucca Club. All Rights Reserved.</p>
+            <div class="footer-content site-footer-main">
+                <p>&copy; <?= date('Y') ?> Yucca Club. All Rights Reserved.</p>
+                <nav class="footer-nav" aria-label="Footer Navigation">
+                    <ul>
+                        <li><a href="#" id="contact-trigger">Contact</a></li>
+                        <li><a href="privacy_policy.php">Privacy Policy</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <p class="sustainability-statement">
+                Crafted with love in Las Cruces, New Mexico
+            </p>
         </div>
     </footer>
 

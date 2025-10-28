@@ -27,11 +27,11 @@ $page_title = "Membership - Yucca Club";
             </a>
             <nav class="primary-nav">
                 <ul>
-                    <li><a href="../stories/">Stories</a></li>
-                    <li><a href="../guides/">Guides</a></li>
-                    <li><a href="../events/">Events</a></li>
+                    <li><a href="../stories/index.php">Stories</a></li>
+                    <li><a href="../guides/index.php">Guides</a></li>
+                    <li><a href="../events/index.php">Events</a></li>
                     <li><a href="https://yucca.printify.me/" target="_blank">Shop</a></li>
-                    <li><a href="index.php" class="active">Membership</a></li>
+                    <li><a href="index.php" class="active">Community</a></li>
                 </ul>
             </nav>
             <div class="header-actions">
@@ -42,7 +42,7 @@ $page_title = "Membership - Yucca Club";
 
     <main>
         <div class="container" style="max-width: 800px; margin: 0 auto; padding: 3rem 2rem;">
-            <h1 class="page-title">Join the Club</h1>
+            <h1 class="page-title">Community Membership</h1>
             
             <div class="pricing-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 3rem;">
                 <div class="pricing-card" style="background: var(--off-white); padding: 2rem; border-radius: 12px; border: 2px solid var(--yucca-yellow);">
@@ -57,15 +57,17 @@ $page_title = "Membership - Yucca Club";
                 
                 <div class="pricing-card" style="background: var(--yucca-yellow); padding: 2rem; border-radius: 12px; color: white;">
                     <h2 style="font-size: 2rem; margin-bottom: 1rem;">Member</h2>
-                    <div style="font-size: 3rem; font-weight: 700;">$5<span style="font-size: 1.5rem;">/month</span></div>
-                    <p style="margin-bottom: 2rem;">All-access pass</p>
+                    <div style="font-size: 3rem; font-weight: 700;">$4<span style="font-size: 1.5rem;">/month</span></div>
+                    <p style="font-size: 0.9rem; opacity: 0.9; margin-bottom: 0.5rem;">Just $1 per week</p>
+                    <p style="margin-bottom: 2rem;">Join our community of supporters</p>
                     <ul style="list-style: none; padding: 0;">
                         <li style="padding: 0.5rem 0;">✓ Ad-free experience</li>
                         <li style="padding: 0.5rem 0;">✓ Exclusive content</li>
                         <li style="padding: 0.5rem 0;">✓ Early access to stories</li>
                         <li style="padding: 0.5rem 0;">✓ Support local journalism</li>
+                        <li style="padding: 0.5rem 0;">✓ Member-only community access</li>
                     </ul>
-                    <a href="<?= is_logged_in() ? '#' : '../../index.php#account-modal' ?>" class="cta-button" style="display: block; text-align: center; margin-top: 2rem;">Join Now</a>
+                    <a href="<?= is_logged_in() ? '#' : '../../index.php#account-modal' ?>" class="cta-button" style="display: block; text-align: center; margin-top: 2rem; background: white; color: var(--yucca-yellow);">Join Now</a>
                 </div>
             </div>
         </div>

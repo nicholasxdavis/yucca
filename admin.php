@@ -1362,7 +1362,7 @@ try {
             resultsDiv.innerHTML = '<p>Testing GitHub connection...</p>';
             
             try {
-                const response = await fetch('api/test_github.php');
+                // const response = await fetch('api/test_github.php'); // removed test endpoint
                 const data = await response.json();
                 
                 let html = '<div style="background: #F5F1E9; padding: 1rem; border-radius: 8px;">';
@@ -1382,7 +1382,7 @@ try {
         }
 
         async function testDatabase() {
-            window.open('test_connection.php', '_blank');
+            // window.open('test_connection.php', '_blank'); // removed test page
         }
 
         async function testAPIs() {

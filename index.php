@@ -353,7 +353,7 @@ main {
                     <li><a href="nav/guides/index.php">Guides</a></li>
                     <li><a href="nav/events/index.php">Events</a></li>
                     <li><a href="https://yucca.printify.me/" target="_blank" rel="noopener noreferrer">Shop</a></li>
-                    <li><a href="nav/community/index.php">Community</a></li>
+                    <li><a href="nav/membership/index.php">Community</a></li>
                 </ul>
             </nav>
             <div class="header-actions">

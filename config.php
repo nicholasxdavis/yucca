@@ -54,7 +54,7 @@ function db_connect() {
         implode('', array_map(function($h) { return "<li>$h</li>"; }, $attempts)) . 
         "</ul>
         <p><strong>Last error:</strong> $error</p>
-        <p><a href='test_connection.php'>Run connection test</a></p>");
+        // <p><a href='test_connection.php'>Run connection test</a></p>"); // removed test link
 }
 
 // Function to check if user is logged in
