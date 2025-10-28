@@ -1027,6 +1027,7 @@ html[data-theme='dark'] .event-date { background-color: #444; }
     border-radius: 6px;
     transition: all 0.2s ease;
     font-family: var(--font-sans);
+    margin: 0;
 }
 
 .mobile-dropdown a:hover,
@@ -1050,9 +1051,14 @@ html[data-theme='dark'] .event-date { background-color: #444; }
     width: 18px;
     text-align: center;
     font-size: 15px;
+    flex-shrink: 0;
 }
 
 .mobile-dropdown button .fas.fa-moon,
 .mobile-dropdown button .fas.fa-sun {
     display: inline-block;
+}
+
+.mobile-dropdown button span {
+    margin-left: 0;
 }
