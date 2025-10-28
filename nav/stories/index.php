@@ -217,7 +217,7 @@ $page_title = "Stories from the Southwest - Yucca Club";
                 <nav class="footer-nav" aria-label="Footer Navigation">
                     <ul>
                         <li><a href="#" id="contact-trigger">Contact</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="../../privacy_policy.php">Privacy Policy</a></li>
                     </ul>
                 </nav>
             </div>
@@ -226,6 +226,46 @@ $page_title = "Stories from the Southwest - Yucca Club";
             </p>
         </div>
     </footer>
+
+    <!-- Account Modal -->
+    <div class="modal-overlay" id="account-modal" role="dialog" aria-modal="true" aria-labelledby="account-modal-title">
+        <div class="modal-content">
+            <button class="modal-close" aria-label="Close dialog">&times;</button>
+            <h2 id="account-modal-title">Member Access</h2>
+            <p>Log in or create an account to access exclusive content.</p>
+            <form class="modal-form" method="POST" action="../../index.php">
+                <input type="hidden" name="action" value="login">
+                <label for="account-email" class="visually-hidden">Email</label>
+                <input id="account-email" type="email" name="email" class="form-input" placeholder="your-email@example.com" required autocomplete="email">
+                <label for="account-password" class="visually-hidden">Password</label>
+                <input id="account-password" type="password" name="password" class="form-input" placeholder="Password" required autocomplete="current-password">
+                <button type="submit" class="cta-button">Log In</button>
+                <p class="form-link"><a href="../../reset_password.html">Forgot password?</a></p>
+                <p class="form-link"><a href="../../index.php">Need an account? Register here.</a></p>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Contact Modal -->
+    <div class="modal-overlay" id="contact-modal" role="dialog" aria-modal="true" aria-labelledby="contact-modal-title">
+        <div class="modal-content">
+            <button class="modal-close" aria-label="Close dialog">&times;</button>
+            <h2 id="contact-modal-title">Get In Touch</h2>
+            <p>Have a question or a story idea? We'd love to hear from you.</p>
+            <form class="modal-form">
+                <label for="contact-name" class="visually-hidden">Name</label>
+                <input id="contact-name" type="text" class="form-input" placeholder="Your Name" required autocomplete="name">
+                <label for="contact-email" class="visually-hidden">Email</label>
+                <input id="contact-email" type="email" class="form-input" placeholder="Your Email" required autocomplete="email">
+                <label for="contact-message" class="visually-hidden">Message</label>
+                <textarea id="contact-message" class="form-input" placeholder="Your Message" required></textarea>
+                <button type="submit" class="cta-button">Send Message</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="toast-container" role="status" aria-live="polite"></div>
+    <button id="back-to-top" aria-label="Back to top"><i class="fas fa-arrow-up" aria-hidden="true"></i></button>
 
     <script src="../../ui/js/if-then.js"></script>
     <script src="../../ui/js/main.js"></script>

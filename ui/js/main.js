@@ -212,12 +212,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         
         // Mobile account trigger
-        if (mobileAccountTrigger) {
+        if (mobileAccountTrigger && accountModal) {
             mobileAccountTrigger.addEventListener('click', (e) => {
                 e.preventDefault();
-                if (accountModal) {
-                    openModal(accountModal);
-                }
+                e.stopPropagation();
+                openModal(accountModal);
                 if (mobileMenuDropdown) {
                     mobileMenuDropdown.classList.remove('show');
                 }
