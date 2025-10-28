@@ -8,12 +8,7 @@ cmds = [
   "mkdir -p /var/cache/nginx"
 ]
 
-[phases.start]
-dependsOn = ["install"]
-cmds = [
-  "echo 'start phase initialized'"
-]
+# Removed the [phases.start] section
 
 [start]
 cmd = "node /assets/scripts/prestart.mjs /assets/nginx.template.conf /nginx.conf && (php-fpm -y /assets/php-fpm.conf & nginx -c /nginx.conf)"
-
