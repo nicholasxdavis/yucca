@@ -136,6 +136,7 @@ $page_title = "Community - Yucca Club";
         </div>
     </footer>
 
+    <script src="../../ui/js/if-then.js"></script>
     <script src="../../ui/js/main.js"></script>
 </body>
 </html>

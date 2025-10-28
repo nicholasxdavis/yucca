@@ -160,6 +160,7 @@
     
     <button id="back-to-top" aria-label="Back to top"><i class="fas fa-arrow-up" aria-hidden="true"></i></button>
 
+    <script src="../../ui/js/if-then.js"></script>
     <script src="../../ui/js/main.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {

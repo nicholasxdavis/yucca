@@ -210,6 +210,7 @@ $page_title = "Stories from the Southwest - Yucca Club";
         </div>
     </footer>
 
+    <script src="../../ui/js/if-then.js"></script>
     <script src="../../ui/js/main.js"></script>
     <script>
         // Hide shimmer loader and show content after load

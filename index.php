@@ -552,6 +552,7 @@ main {
                 <p class="form-link login-only-link"><a href="reset_password.html">Forgot password?</a></p>
             </form>
             
+            <script src="ui/js/if-then.js"></script>
             <script>
                 document.getElementById('switch-mode-link').addEventListener('click', function(e) {
                     e.preventDefault();
